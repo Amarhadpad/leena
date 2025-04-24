@@ -11,6 +11,8 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'  # Replace this with a random and unique string
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+if not os.path.exists(DATA_DIR):
+    os.makedirs(DATA_DIR)
 BOOKINGS_CSV = os.path.join(DATA_DIR, 'bookings.csv')
 
 def read_bookings_from_csv():
