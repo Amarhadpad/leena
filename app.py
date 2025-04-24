@@ -611,5 +611,8 @@ def print_invoice(booking_id):
     # For simplicity, redirect to booking details or implement invoice generation
     return redirect(url_for('booking_details', booking_id=booking_id))
 
+import os
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
