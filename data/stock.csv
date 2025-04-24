@@ -1,4 +1,6 @@
 id,product_name,price,quantity
-1,mouse,0.0,0
-2,printer,0.0,0
+1,mouse,0.0,20
+2,printer,0.0,10
 3,monitor,0.0,10
+4,keyboard,0.0,20
+5,usb hub,0.0,10

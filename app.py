@@ -7,8 +7,10 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 
+import os
+
 app = Flask(__name__)
-app.secret_key = 'your_secret_key_here'  # Replace this with a random and unique string
+app.secret_key = os.environ.get('SECRET_KEY', 'your_secret_key_here')  # Use environment variable for secret key
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
 if not os.path.exists(DATA_DIR):
