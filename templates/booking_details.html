@@ -1,37 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Booking Details</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .header-banner {
+            background: linear-gradient(90deg, #007bff, #6610f2);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .card {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-radius: 15px;
+        }
+        .form-group label {
+            font-weight: 600;
+            color: #495057;
+        }
+        .btn-primary, .btn-success {
+            min-width: 140px;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(0,123,255,0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover, .btn-success:hover {
+            box-shadow: 0 6px 12px rgba(0,123,255,0.5);
+        }
+        .btn + .btn {
+            margin-left: 10px;
+        }
+        .flashes {
+            list-style: none;
+            padding-left: 0;
+        }
+        .flashes li {
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+    </style>
 </head>
 <body>
 
-<div class="container my-5">
-    <h1>Booking Details</h1>
+<div class="header-banner">
+    <h1><i class="fas fa-calendar-check"></i> Booking Details</h1>
+</div>
 
+<div class="container">
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <ul class="flashes">
             {% for category, message in messages %}
-                <li class="alert alert-{{ category }}">{{ message }}</li>
+                <li class="alert alert-{{ category }} shadow-sm">{{ message }}</li>
             {% endfor %}
             </ul>
         {% endif %}
     {% endwith %}
 
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Booking ID: {{ booking[0] }}</h5>
-            <p><strong>Name:</strong> {{ booking[1] }}</p>
-            <p><strong>Contact Number:</strong> {{ booking[2] }}</p>
-            <p><strong>Service:</strong> {{ booking[3] }}</p>
-            <p><strong>Service Date:</strong> {{ booking[4] }}</p>
-            <p><strong>Special Request:</strong> {{ booking[5] }}</p>
-
-            <a href="{{ url_for('index') }}" class="btn btn-primary">Back to Home Page</a>
-        </div>
+    <div class="card p-4">
+        <form method="POST" action="{{ url_for('booking_details', booking_id=booking['id']) }}">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="name"><i class="fas fa-user"></i> Name</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ booking['name'] }}" required />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="contact_no"><i class="fas fa-phone"></i> Contact Number</label>
+                    <input type="text" class="form-control" id="contact_no" name="contact_no" value="{{ booking['contact_no'] }}" required />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="service"><i class="fas fa-concierge-bell"></i> Service</label>
+                    <input type="text" class="form-control" id="service" name="service" value="{{ booking['service'] }}" required />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="service_date"><i class="fas fa-calendar-alt"></i> Service Date</label>
+                    <input type="date" class="form-control" id="service_date" name="service_date" value="{{ booking['service_date'] }}" required />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="special_request"><i class="fas fa-sticky-note"></i> Special Request</label>
+                <textarea class="form-control" id="special_request" name="special_request" rows="3">{{ booking['special_request'] }}</textarea>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Update Booking</button>
+                <a href="{{ url_for('index') }}" class="btn btn-primary"><i class="fas fa-home"></i> Back to Home Page</a>
+            </div>
+        </form>
     </div>
 </div>
 

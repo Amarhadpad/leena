@@ -158,9 +158,9 @@
             <div class="row">
                 <div class="col-md-6">
                     <h5>Seller</h5>
-                    <input type="text" class="form-control" id="seller_name" placeholder="Seller Name" value="TechWorld Computers">
-                    <textarea class="form-control mt-2" id="seller_address" rows="3" placeholder="Seller Address">456 Tech Street, Silicon Valley, CA</textarea>
-                    <input type="text" class="form-control mt-2" id="seller_gstin" placeholder="GSTIN" value="12ABCDE1234Z9A">
+                    <input type="text" class="form-control" id="seller_name" placeholder="Seller Name" value="Sam Computers">
+                    <textarea class="form-control mt-2" id="seller_address" rows="3" placeholder="Seller Address">Shop No 105,Iccha Sadan Building,Near VVMC Hospital .opp.Shivsena Office,Sativali,Vasai East</textarea>
+                    <input type="text" class="form-control mt-2" id="seller_gstin" placeholder="GSTIN" value="27ARRPM9983G1ZT">
                 </div>
                 <div class="col-md-6">
                     <h5>Buyer</h5>
@@ -237,8 +237,8 @@
         <!-- Datalist for stock items suggestions -->
         <datalist id="stock-list">
             {% for item in stock_items %}
-                {% if item[1] > 0 %}
-                    <option value="{{ item[0] }}">{{ item[0] }} ({{ item[1] }} in stock)</option>
+                {% if item['quantity']|int > 0 %}
+                    <option value="{{ item['product_name'] }}">{{ item['product_name'] }} ({{ item['quantity'] }} in stock)</option>
                 {% endif %}
             {% endfor %}
         </datalist>

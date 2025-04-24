@@ -170,10 +170,10 @@
             </thead>
             <tbody>
                 {% for item in stock_items %}
-                    {% if item[2] > 0 %}
+                    {% if item['quantity']|int > 0 %}
                         <tr>
-                            <td>{{ item[1] }}</td>
-                            <td>{{ item[2] }}</td>
+                            <td>{{ item['product_name'] }}</td>
+                            <td>{{ item['quantity'] }}</td>
                         </tr>
                     {% endif %}
                 {% endfor %}
